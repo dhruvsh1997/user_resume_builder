@@ -1,0 +1,7 @@
+django>=4.2
+psycopg2-binary>=2.9.0
+groq
+dotenv
+celery>=5.3.6 
+django-celery-results 
+rabbitmq

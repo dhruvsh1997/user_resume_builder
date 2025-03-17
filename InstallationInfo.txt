@@ -1,0 +1,64 @@
+#With DockerFile and Docker-Compose
+docker images
+docker network ls
+docker-compose up --build
+docker ps
+docker logs django_app
+docker logs postgres_db
+docker-compose down -v
+docker-compose up --build
+#In another tab while other command is running
+    docker-compose exec django_app python manage.py migrate
+#replace 0.0.0.0 with localhost in 0.0.0.0:8000 
+#For Celery
+docker start RabbitMQ
+#for RabitMQ http://localhost:15672/
+docker-compose run django_app celery -A UserApp worker --loglevel=in
+#push to dockerhub
+docker login
+docker tag userformreport_django_app dhruvsh1997/userformreport:latest
+docker push dhruvsh1997/userformreport:latest 
+    
+#Without Creation DockerFile and Docker-Compose
+docker --version
+docker pull postgres
+docker run --name pg_container -e POSTGRES_USER=postgres -e POSTGRES_PASSWORD=postgres -e POSTGRES_DB=UserFormDB -p 5432:5432 -d postgres
+docker ps
+docker logs pg_container
+docker exec -it pg_container bash
+psql -U postgres
+ALTER USER postgres WITH PASSWORD 'postgres';
+docker restart pg_container
+docker stop $(docker ps -aq)
+docker rm $(docker ps -aq)
+docker build -t user_form_app .
+docker run -d --name postgres_container_name -e POSTGRES_DB=UserFormDB -e POSTGRES_USER=postgres -e POSTGRES_PASSWORD=postgres -p 5432:5432 postgres
+docker exec -it postgres_container psql -U UserFormDB  
+
+ConnectMAIN
+docker stop pg_container
+docker rm pg_container
+docker volume prune
+docker run -d ^
+  --name pg_container ^
+  -e POSTGRES_DB=UserFormDB ^
+  -e POSTGRES_USER=postgres ^
+  -e POSTGRES_PASSWORD=postgres ^
+  -p 5432:5432 ^
+  postgres ^
+  -c password_encryption=md5
+docker exec -it pg_container psql -U postgres
+SHOW password_encryption;
+
+
+Alternatives
+docker exec -it pg_container bash
+    apt-get update && apt-get install nano
+    cat /var/lib/postgresql/data/pg_hba.conf
+    nano /var/lib/postgresql/data/pg_hba.conf
+    edit this "host all all all scram-sha-256" to this "host all all all md5"
+    nano /var/lib/postgresql/data/postgresql.conf
+    #password_encryption = md5      # scram-sha-256 or md5
+docker exec -it pg_container bash
+    psql -U postgres
+        SHOW password_encryption;

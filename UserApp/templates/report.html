@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>User Report</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.2/css/bootstrap.min.css">
+</head>
+<body>
+    <div class="container mt-5">
+        <h2 class="mb-4">Generated User Resume</h2>
+        <div class="card">
+            <div class="card-body">
+                <pre>{{ resume }}</pre>
+            </div>
+        </div>
+        <a href="{% url 'user_list' %}" class="btn btn-primary mt-3">Back to User List</a>
+    </div>
+</body>
+</html>
